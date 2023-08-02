@@ -2,25 +2,27 @@ import React from "react";
 // import axios from "axios";
 
 const ActionProvider = ({ createChatBotMessage, setState, children }) => {
-  const mockResponse = (stateRef) => {
-    console.log(stateRef);
+  const mockResponse = () => {
     const response = "response message";
     return response;
   };
 
-  const handleAiMessage = async (message) => {
-    var botMessage = createChatBotMessage("");
+  const getBotMessage = (prevMessages) => {
+    // Send previous messages to API endpoint and retrieve the new message
+    console.log(prevMessages);
     try {
-      const response = mockResponse("mockState"); //await axios.post("api/v1/chat", prevRef.current);
+      const response = mockResponse("mock AI message"); //await axios.post("api/v1/chat", prevRef.current);
       // Bot will return response in the message property of the response
-      botMessage = createChatBotMessage(response);
+      return response;
     } catch (e) {
-      botMessage = createChatBotMessage(`I'm sorry, I seem to be broken right now. Please try again later.`);
+      return `I'm sorry, I seem to be broken right now. Please try again later.`;
     }
+  };
 
+  const handleAiMessage = async (message) => {
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, botMessage],
+      messages: [...prev.messages, createChatBotMessage(getBotMessage(prev))],
     }));
   };
 
