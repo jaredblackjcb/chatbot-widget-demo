@@ -1,3 +1,9 @@
+# List of configuation options needed for chatbot widget
+<ul>
+<b>config.js</b>
+<li>initialMessages</li>
+</ul>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
