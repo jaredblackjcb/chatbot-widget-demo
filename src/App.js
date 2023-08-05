@@ -3,7 +3,11 @@ import AiBot from "./components/AiBot";
 function App() {
   return (
     <div>
-      <AiBot apiKey={"testApiKey"} />
+      <AiBot
+        apiKey={"yourApiKey"}
+        namespace={"yourNamespace"}
+        initialMesage={"Hello! This is a configurable message."}
+      />
     </div>
   );
 }

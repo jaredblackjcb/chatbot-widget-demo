@@ -1,16 +1,16 @@
 import { createChatBotMessage } from "react-chatbot-kit";
 
-const config = {
-  initialMessages: [createChatBotMessage(`Hello world`)],
+const config = (apiKey, namespace, initialMessage) => ({
+  initialMessages: [createChatBotMessage(initialMessage)],
   state: {
     headerConfig: {
       headers: {
-        "Api-Key": "jared_api_key",
+        "Api-Key": apiKey,
+        namespace: namespace,
         "Content-Type": "application/json",
-        namespace: "jared_company",
       },
     },
   },
-};
+});
 
 export default config;

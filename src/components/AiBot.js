@@ -6,11 +6,17 @@ import config from "../chatbot/config.js";
 import MessageParser from "../chatbot/MessageParser";
 import ActionProvider from "../chatbot/ActionProvider";
 
-export default function AiBot({ apiKey }) {
+export default function AiBot({ apiKey, namespace, initialMesage }) {
   const [showBot, toggleBot] = useState(true);
   return (
     <div>
-      {showBot && <Chatbot config={config} messageParser={MessageParser} actionProvider={ActionProvider} />}
+      {showBot && (
+        <Chatbot
+          config={config(apiKey, namespace, initialMesage)}
+          messageParser={MessageParser}
+          actionProvider={ActionProvider}
+        />
+      )}
       <button onClick={() => toggleBot((prev) => !prev)}>Bot</button>
     </div>
   );
