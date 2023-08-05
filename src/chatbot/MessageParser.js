@@ -5,32 +5,28 @@ class MessageParser {
     this.state = state;
   }
 
-  createBody(message) {
-    const context = this.state.messages.map(({ message, type }) => ({ message, type }));
-    const body = {
-      message: message,
-      context: context,
-    };
-
-    return JSON.stringify(body);
+  getContext() {
+    return this.state.messages.map(({ message, type }) => ({ message, type }));
   }
 
-  getAiMessage(message) {
-    const body = this.createBody(message);
-    console.log(body);
+  async getAiMessage(message) {
     try {
-      const response = "test response"; // await axios.get("/api/v1/chat", body);
-      return response;
+      const response = await axios.post("/api/v1/chat", { message: message, context: this.getContext() });
+      return response.data;
     } catch (e) {
       return "I'm sorry, I seem to be broken right now. Please try again later.";
     }
   }
 
-  parse(message) {
+  async parse(message) {
     console.log(this.state);
     console.log(message);
-    const newMessage = this.getAiMessage(message);
-    return this.actionProvider.handleAiMessage(newMessage);
+    try {
+      const newMessage = await this.getAiMessage(message);
+      return this.actionProvider.handleAiMessage(newMessage);
+    } catch (e) {
+      console.error(e);
+    }
   }
 }
 
