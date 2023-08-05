@@ -1,7 +1,9 @@
 # List of configuation options needed for chatbot widget
 <ul>
 <b>config.js</b>
-<li>initialMessages</li>
+<li>initial messages</li>
+<li>namespace</li>
+<li>api key</li>
 </ul>
 
 # Getting Started with Create React App

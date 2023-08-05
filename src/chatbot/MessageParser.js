@@ -11,7 +11,11 @@ class MessageParser {
 
   async getAiMessage(message) {
     try {
-      const response = await axios.post("/api/v1/chat", { message: message, context: this.getContext() });
+      const response = await axios.post(
+        "/api/v1/chat",
+        { message: message, context: this.getContext() },
+        this.state.headerConfig
+      );
       return response.data;
     } catch (e) {
       return "I'm sorry, I seem to be broken right now. Please try again later.";
