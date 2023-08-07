@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Chatbot from "react-chatbot-kit";
-import "react-chatbot-kit/build/main.css";
+import Fab from "@mui/material/Fab";
+import ChatIcon from "@mui/icons-material/Chat";
+import Box from "@mui/material/Box";
 
 import config from "../chatbot/config.js";
 import MessageParser from "../chatbot/MessageParser";
@@ -9,7 +11,7 @@ import ActionProvider from "../chatbot/ActionProvider";
 export default function AiBot({ apiKey, namespace, initialMesage }) {
   const [showBot, toggleBot] = useState(true);
   return (
-    <div>
+    <Box>
       {showBot && (
         <Chatbot
           config={config(apiKey, namespace, initialMesage)}
@@ -17,7 +19,9 @@ export default function AiBot({ apiKey, namespace, initialMesage }) {
           actionProvider={ActionProvider}
         />
       )}
-      <button onClick={() => toggleBot((prev) => !prev)}>Bot</button>
-    </div>
+      <Fab color="primary" aria-label="add" onClick={() => toggleBot((prev) => !prev)}>
+        <ChatIcon />
+      </Fab>
+    </Box>
   );
 }
